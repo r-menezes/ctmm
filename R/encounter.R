@@ -1,5 +1,5 @@
 # relative encounter rates (trajectory based)
-encounter.ecdf <- function(data,UD,level=0.95,debias=TRUE,res.time=1,r=NULL,...)
+encounter.ecdf <- function(data,UD,level=0.95,debias=TRUE,res.time=1,r=NULL,uniform=TRUE,...)
 {
   if(class(UD[[1]])[1]=="UD")
   { CTMM <- lapply(UD,function(ud){ud@CTMM}) }
@@ -12,7 +12,7 @@ encounter.ecdf <- function(data,UD,level=0.95,debias=TRUE,res.time=1,r=NULL,...)
 
   if(OVER<=0) { stop("No overlapping times.") }
 
-  DIFF <- difference(data,CTMM,uniform=TRUE,res.time=1,...)
+  DIFF <- difference(data,CTMM,uniform=uniform,res.time=1,...)
   # prediction information
   R2 <- DIFF$x^2+DIFF$y^2
   VAR <- 2*DIFF$VAR.xy
